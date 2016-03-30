@@ -1,0 +1,309 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" >
+
+    <style type="text/css">
+
+        .highlight{background:red;font-weight:bold;color:white;}
+
+        body {
+            padding-top: 50px;
+        }
+
+        select {
+            width: 220px;
+            height: 30px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+        }
+        <!--
+        .STYLE1 {font-size: 12px}
+        a:link {
+            color: #FFFFFF;
+            text-decoration: none;
+        }
+        a:visited {
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: none;
+        }
+        a:active {
+            text-decoration: none;
+        }
+        -->
+    </style>
+
+    <meta name="keywords"  content="text/html; charset=gb2312" />
+    <meta name="description" content="text/html; charset=gb2312" />
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+    <script>
+
+        function showName(){
+            document.all.l1.style.display='block';
+
+        }
+        function contentInfo(t){
+
+            div1.innerHTML= document.getElementById("div"+ t).innerHTML;
+            div1.style.display="";
+
+        }
+
+        function encode(s){
+            return s.replace(/&/g,"&").replace(/</g,"<").replace(/>/g,">").replace(/([\\\.\*\[\]\(\)\$\^])/g,"\\$1");
+        }
+
+        function decode(s){
+            return s.replace(/\\([\\\.\*\[\]\(\)\$\^])/g,"$1").replace(/>/g,">").replace(/</g,"<").replace(/&/g,"&");
+        }
+
+
+        function highlight(s){
+            if (s.length==0){
+                alert('Please enter the name！');
+                return false;
+            }
+            s=encode(s);
+            var obj=document.getElementById("l1");
+            var t=obj.innerHTML.replace(/<span\s+class=.?highlight.?>([^<>]*)<\/span>/gi,"$1");
+            obj.innerHTML=t;
+            var cnt=loopSearch(s,obj);
+            t=obj.innerHTML
+            var r=/{searchHL}(({(?!\/searchHL})|[^{])*){\/searchHL}/g
+            t=t.replace(r,"<span class='highlight'>$1</span>");
+            obj.innerHTML=t;
+
+        }
+
+        function loopSearch(s,obj){
+            var cnt=0;
+            if (obj.nodeType==3){
+                cnt=replace(s,obj);
+                return cnt;
+            }
+            for (var i=0,c;c=obj.childNodes[i];i++){
+                if (!c.className||c.className!="highlight")
+                    cnt+=loopSearch(s,c);
+            }
+            return cnt;
+        }
+
+        function replace(s,dest){
+            var r=new RegExp(s,"g");
+            var tm=null;
+            var t=dest.nodeValue;
+            var cnt=0;
+            if (tm=t.match(r)){
+                cnt=tm.length;
+                t=t.replace(r,"{searchHL}"+decode(s)+"{/searchHL}")
+                dest.nodeValue=t;
+            }
+            return cnt;
+        }
+    </script>
+
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">StockXpert Pro</a>
+        </div>
+    </div>
+</nav>
+
+<div  align="center" class="row" >
+
+
+    <form onsubmit="highlight(this.s.value);return false;">
+
+        <div class="col-sm-8" style="padding-left:450px">
+
+            <h4>COMPANY SUMMARY</h4>
+
+            <p><input type="text" name="s" id="s" placeholder="Company Name"  class="form-control " title="search"/>
+
+                <input type="submit"  class="btn btn-primary" value="Search" />
+            </p>
+
+        </div>
+
+    </form>
+
+</div>
+
+
+
+<div id="l1" align="center" style=" padding-top: 20px;" >
+
+    <TABLE width="80%" border="2"  style="padding-left: 400px; text-align: center" class="table table-bordered col-sm-8" >
+
+        <TBODY>
+
+        <TR>
+            <TD width="20%"><A onclick="contentInfo(2)"> Acer </A></TD>
+            <TD width="20%"> <A onclick="contentInfo(3)">Adidas</A></TD>
+            <TD width="20%"><A onclick="contentInfo(4)"> Agoda </A></TD>
+            <TD width="20%"><A onclick="contentInfo(5)"> Amazon </A></TD>
+            <TD width="20%"> <A onclick="contentInfo(6)">Apple</A></TD></TR>
+        <TR>
+            <TD width="20%"><A onclick="contentInfo(7)"> Barnes&Noble </A></TD>
+            <TD width="20%"> <A onclick="contentInfo(8)">Bear Stearns</A></TD>
+            <TD width="20%"><A onclick="contentInfo(9)"> Best Buy </A></TD>
+            <TD width="20%"><A onclick="contentInfo(10)"> BlackRock </A></TD>
+            <TD width="20%"> <A onclick="contentInfo(11)">Blockbuster</A></TD></TR>
+        <TR>
+            <TD width="20%"><A onclick="contentInfo(12)"> Coca-Cola</A></TD>
+            <TD width="20%"> <A onclick="contentInfo(13)">Costco Wholesale</A></TD>
+            <TD width="20%"><A onclick="contentInfo(14)"> Ebay </A></TD>
+            <TD width="20%"><A onclick="contentInfo(15)"> Facebook</A></TD>
+            <TD width="20%"> <A onclick="contentInfo(16)">Ford</A></TD></TR>
+
+        <TR>
+            <TD width="20%"><A onclick="contentInfo(17)">Google</A></TD>
+            <TD width="20%"> <A onclick="contentInfo(18)">Meadwestvaco</A></TD>
+            <TD width="20%"><A onclick="contentInfo(19)">Microsoft</A></TD>
+            <TD width="20%"><A onclick="contentInfo(20)"> Nike</A></TD>
+            <TD width="20%"> <A onclick="contentInfo(21)">Staples</A></TD></TR>
+        </TBODY>
+    </TABLE>
+
+    <div id="div1" align="center" style="padding-top: 30px"></div>
+
+</div>
+
+
+
+
+
+<div id="div2" style="display: none" align="center">
+
+    <p><h5 style="text-align: left" >Acer Inc. is a Taiwanese multinational hardware and electronics corporation specializing in advanced electronics technology and is headquartered in Xizhi, New Taipei City, Taiwan. </h5></p>
+    <img src="acer.jpg"  width="300" height="300" style="border:5px double lightskyblue"/>
+
+</div>
+
+<div id="div3" style="display: none" align="center">
+    <p><h5 style="text-align: left" >Adidas AG is a German multinational corporation that designs and manufactures sports shoes, clothing and accessories headquartered in Herzogenaurach, Bavaria. It is the largest sportswear manufacturer in Europe and the second biggest in the world, after Nike.</h5></p>
+    <img src="adidas.jpg"  width="300" height="300" style="border:5px double lightskyblue"/>
+
+</div>
+
+<div id="div4" style="display: none" align="center">
+    <p><h5 style="text-align: left" >Agoda Company Pte Ltd is an Online Travel Agency (OTA) based in Singapore that offers accommodation booking services through its website and mobile app. Agoda.com is reported to be only Asia-based online travel company to hold a spot within the top six, according to data from industry observer, Skift.</h5></p>
+    <img src="agoda.jpg"  width="300" height="300" style="border:5px double lightskyblue"/>
+</div>
+
+<div id="div5" style="display: none" align="center">
+    <p><h5 style="text-align: left " >Amazon.com, Inc. often referred to as simply Amazon, is an American electronic commerce and cloud computing company with headquarters in Seattle, Washington. It is the largest Internet-based retailer in the United States.</h5></p>
+    <img src="amazon.jpg"  width="300" height="300" style="border:5px double lightskyblue"/>
+
+</div>
+
+<div id="div6" style="display: none" align="center">
+    <p><h5 style="text-align: left" >Apple Inc. is an American multinational technology company headquartered in Cupertino, California, that designs, develops, and sells consumer electronics, computer software, and online services. Its hardware products include the iPhone smartphone, the iPad tablet computer, the Mac personal computer, the iPod portable media player, and the Apple Watch smartwatch.</h5></p>
+    <img src="apple.jpg"  width="300" height="300" style="border:5px double lightskyblue"/>
+</div>
+
+<div id="div7" style="display: none" align="center">
+    <p><h5 style="text-align: left" >Barnes & Noble appears in the 2008 Fortune 500 company listing. Every year Fortune the American business magazine compiles, ranks and publishes a list of the top 500 U.S. public corporations based on their gross revenue. The Top Fortune 500 Company list provides Fortune magazine readers with facts and information about the top companies and their contributions to the American economy. Companies eligible for inclusion in the Top Fortune 500 Company list are are those incorporated in the United States and whose revenues are publicly available</h5></p>
+    <img src="barnes.jpg"  width="300" height="300" style="border:5px double lightskyblue"/>
+</div>
+
+<div id="div8" style="display: none" align="center">
+    <p><h5 style="text-align: left " >The Bear Stearns Companies, Inc. was a New York-based global investment bank and securities trading and brokerage firm that failed in 2008 as part of the global financial crisis and recession and was subsequently sold to JPMorgan Chase.</h5></p>
+    <img src="bearsterns.jpg"  width="300" height="300" style="border:5px double lightskyblue"/>
+</div>
+
+<div id="div9" style="display: none" align="center">
+    <p><h5 style="text-align: left" >Best Buy appears in the 2008 Fortune 500 company listing. Every year Fortune the American business magazine compiles, ranks and publishes a list of the top 500 U.S. public corporations based on their gross revenue. The Top Fortune 500 Company list provides Fortune magazine readers with facts and information about the top companies and their contributions to the American economy. Companies eligible for inclusion in the Top Fortune 500 Company list are are those incorporated in the United States and whose revenues are publicly available.</h5></p>
+    <img src="bestbuy.jpg"  width="300" height="300" style="border:5px double lightskyblue"/>
+</div>
+
+<div id="div10" style="display: none" align="center">
+    <p><h5 style="text-align: left" >BlackRock appears in the 2008 Fortune 500 company listing. Every year Fortune the American business magazine compiles, ranks and publishes a list of the top 500 U.S. public corporations based on their gross revenue. The Top Fortune 500 Company list provides Fortune magazine readers with facts and information about the top companies and their contributions to the American economy. Companies eligible for inclusion in the Top Fortune 500 Company list are are those incorporated in the United States and whose revenues are publicly available.</h5></p>
+    <img src="blackrock.jpeg"  width="300" height="300" style="border:5px double lightskyblue"/>
+</div>
+
+<div id="div11" style="display: none" align="center">
+    <p><h5 style="text-align: left" >Blockbuster appears in the 2008 Fortune 500 company listing. Every year Fortune the American business magazine compiles, ranks and publishes a list of the top 500 U.S. public corporations based on their gross revenue. The Top Fortune 500 Company list provides Fortune magazine readers with facts and information about the top companies and their contributions to the American economy. Companies eligible for inclusion in the Top Fortune 500 Company list are are those incorporated in the United States and whose revenues are publicly available.</h5></p>
+    <img src="blockbuster.jpg"  width="300" height="300" style="border:5px double lightskyblue"/>
+
+</div>
+
+
+<div id="div12" style="display: none" align="center">
+    <p><h5 style="text-align: left" >The Coca-Cola Company is an American historical multinational beverage corporation and manufacturer, retailer, and marketer of nonalcoholic beverage concentrates and syrups, which is headquartered in Atlanta, Georgia.</h5></p>
+    <img src="coca.png"  width="300" height="300" style="border:5px double lightskyblue"/>
+</div>
+
+
+<div id="div13" style="display: none" align="center">
+    <p><h5 style="text-align: left" >Costco Wholesale Corporation is an American membership-only warehouse club that provides a wide selection of merchandise. It is currently the largest membership-only warehouse club in the United States.</h5></p>
+    <img src="costco.jpg"  width="300" height="300" style="border:5px double lightskyblue"/>
+</div>
+
+
+<div id="div14" style="display: none" align="center">
+    <p><h5 style="text-align: left" >eBay Inc. (stylized as "ebay" since late 2012) is an American multinational corporation and e-commerce company, providing consumer-to-consumer and business-to-consumer sales services via the internet. It is headquartered in San Jose, California. </h5></p>
+    <img src="ebay.jpg"  width="300" height="300" style="border:5px double lightskyblue"/>
+</div>
+
+
+<div id="div15" style="display: none" align="center">
+    <p><h5 style="text-align: left" >Facebook is a corporation and online social networking service headquartered in Menlo Park, California, in the United States. Its website was launched on February 4, 2004, by Mark Zuckerberg with his Harvard College roommates and fellow students Eduardo Saverin, Andrew McCollum, Dustin Moskovitz and Chris Hughes.</h5></p>
+    <img src="facebook.png"  width="300" height="300" style="border:5px double lightskyblue"/>
+</div>
+
+<div id="div16" style="display: none" align="center">
+    <p><h5 style="text-align: left" >he Ford Motor Company (commonly referred to simply as Ford) is an American multinational automaker headquartered in Dearborn, Michigan, a suburb of Detroit. It was founded by Henry Ford and incorporated on June 16, 1903. </h5></p>
+    <img src="ford.jpg"  width="300" height="300" style="border:5px double lightskyblue"/>
+</div>
+
+<div id="div17" style="display: none" align="center">
+    <p><h5 style="text-align: left" >Google is an American multinational technology company specializing in Internet-related services and products. These include online advertising technologies, search, cloud computing, and software.</h5></p>
+    <img src="google.jpg"  width="300" height="300" style="border:5px double lightskyblue"/>
+</div>
+
+
+<div id="div18" style="display: none" align="center">
+    <p><h5 style="text-align: left" >MeadWestvaco Corporation is an American packaging company based in Richmond, Virginia. It has approximately 23,000 employees. In February 2006, it moved its corporate headquarters to Richmond, Virginia. </h5></p>
+    <img src="meadwestvaco.jpg"  width="300" height="300" style="border:5px double lightskyblue"/>
+</div>
+
+
+<div id="div19" style="display: none" align="center">
+    <p><h5 style="text-align: left" >Microsoft Corporation is an American multinational technology company headquartered in Redmond, Washington, that develops, manufactures, licenses, supports and sells computer software, consumer electronics and personal computers and services. </h5></p>
+    <img src="micsoft.png"  width="300" height="300" style="border:5px double lightskyblue"/>
+</div>
+
+
+<div id="div20" style="display: none" align="center">
+    <p><h5 style="text-align: left" >Nike, Inc. is an American multinational corporation that is engaged in the design, development, manufacturing and worldwide marketing and sales of footwear, apparel, equipment, accessories and services. </h5></p>
+    <img src="nike.jpeg"  width="300" height="300" style="border:5px double lightskyblue"/>
+</div>
+
+
+
+<div id="div21" style="display: none" align="center">
+    <p><h5 style="text-align: left" >Staples, Inc. is a large United States office supply chain store, with over 2,000 stores worldwide in 26 countries. Staples sells supplies, office machines, promotional products, furniture, technology, and business services both in stores and online. The company opened its first store in Brighton, Massachusetts on May 1, 1986.</h5></p>
+    <img src="staples.jpg"  width="300" height="300" style="border:5px double lightskyblue"/>
+</div>
+
+</body>
+
+</html>
